@@ -1,0 +1,47 @@
+import discord
+from discord.ext import commands
+import random
+
+
+intents = discord.Intents.default()
+intents.members = True
+intents.message_content = True
+
+bot = commands.Bot(command_prefix='#', intents=intents)
+
+@bot.event
+async def on_ready():
+    print(f'Logged in as {bot.user} (ID: {bot.user.id})')
+    print('Бот готов к работе')
+
+
+@bot.command()
+async def hello(ctx):
+    await ctx.send('И тебе привет человек!')
+
+
+@bot.command()
+async def add(ctx, left: int, right: int):
+    """Adds two numbers together."""
+    await ctx.send(left + right)
+
+
+
+@bot.command()
+async def repeat(ctx, times: int, content='repeating...'):
+    """Repeats a message multiple times."""
+    for i in range(times):
+        await ctx.send(content)
+
+
+
+@bot.command()
+async def mem(ctx):
+    with open('images/mem1.jpg', 'rb') as f:
+        # В переменную кладем файл, который преобразуется в файл библиотеки Discord!
+        picture = discord.File(f)
+   # Можем передавать файл как параметр!
+    await ctx.send(file=picture)
+
+        
+bot.run('MTI4OTY2NTk0MzQ3MTAwMTcxMQ.GRsKJy.i3cZOpuPt8ZZkRI02HRDR1DuI9mOnXgZnJNAiE')c
